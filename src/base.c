@@ -14,7 +14,9 @@ void input_print(char *input)
 {
     const char NULL_char[] = " ";
     argv[0] = strtok(input,NULL_char);
-    argv[1] = strtok(NULL,NULL_char);
+    short i = 0;
+    while(argv[i] != NULL)
+	argv[++i] = strtok(NULL,NULL_char);
 }
 
 int exec_cmd(char *input)
