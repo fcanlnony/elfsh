@@ -41,7 +41,9 @@ static void create()
 
 void cat_sign(int signnum)
 {
-    printf("\n\033[31m:(\n\033[0m");
+    char errput[1024];
+    sprintf(errput,"\n\033[31mSignal : %d \t\t\t\t\t:(\n\033[0m",signnum);
+    printf("%s",errput);
 }
 
 int argc;
