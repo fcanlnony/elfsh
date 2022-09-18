@@ -6,9 +6,9 @@
 #include <sys/types.h>
 
 #include "base.h"
+#include "buildin.h"
 
-extern int argc;
-extern char *argv[25];
+extern char *argv[50];
 
 void input_print(char *input)
 {
@@ -28,7 +28,7 @@ int exec_cmd(char *input)
     }
     else if(pidN == 0) {
 	input_print(input);
-	execvp(argv[0],argv);
+	buildincmd(argv);
 	exit(0);
     } else {
 	int status = wait(&status);

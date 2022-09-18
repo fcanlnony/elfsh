@@ -46,8 +46,7 @@ void cat_sign(int signnum)
     printf("%s",errput);
 }
 
-int argc;
-char *argv[25];
+char *argv[50];
 
 int main()
 {
