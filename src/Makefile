@@ -1,8 +1,8 @@
 cc = gcc -std=c11
 cc_debug = ${cc} -g
-headers = base.h define.h
+headers = buildin.h base.h define.h
 name = elfsh
-sources = base.c elfsh.c
+sources = buildin.c base.c elfsh.c
 
 all:
 	${cc} ${headers} ${sources} -o ${name}
