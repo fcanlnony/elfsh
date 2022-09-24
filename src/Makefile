@@ -1,4 +1,4 @@
-cc = gcc -std=c11
+cc = gcc -std=c99 -lncurses
 cc_debug = ${cc} -g
 headers = buildin.h base.h define.h
 name = elfsh
