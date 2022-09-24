@@ -29,9 +29,9 @@ static void getPath()
     printf("%s",path);
 }
 
-static void create();
+void create();
 
-static void create()
+void create()
 {
     getUsername();
     printf(" [ ");
@@ -51,10 +51,11 @@ char *argv[50];
 int main()
 {
     char input[1024];
-	char exit_sign[]="exit";
+    char exit_sign[]="exit";
     while (1) {
         signal(SIGINT,cat_sign);
-        create();
+	fflush(stdout);
+	create();
         scanf("%[^\n]%*c",input);
         if (!strcmp(input, exit_sign)) {
             exit(0);

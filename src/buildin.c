@@ -16,7 +16,6 @@ static short checkpipeNum(char *argv[])
     while(argv[++i]!= NULL) {
 	if(strcmp(argv[i],"|") == 0) {
 	    return 1;
-	    break;
 	}
     }
     return 0;
@@ -80,14 +79,16 @@ static short cmd_cd(char *argv);
 
 static short cmd_cd(char *argv)
 {
+    char cwd[100];
     if(access(argv,F_OK) == -1) {
-	fprintf(stdout,"elfsh: cd :%s :Not such file or directory",argv);
+	fprintf(stdout,"elfsh: cd :%s :Not such file or directory\n",argv);
 	return -1;
     }
     if(chdir(argv) == -1) {
-	fprintf(stdout, "elfsh: cd:%s :isn't a directory",argv);
+	fprintf(stdout, "elfsh: cd:%s :isn't a directory\n",argv);
 	return -2;
-    }
+    } else if(getcwd(cwd,sizeof(cwd)) == NULL)
+	fprintf(stderr,"getcwd() error\n");
     return 0;
 }
 
@@ -114,6 +115,6 @@ int buildincmd(char *argv[])
 	if(checkinside(argv) == 0)
 	    cmd_cd(argv[1]);
 	else execvp(argv[0],argv);
-    }
+	}
     return 0;
 }
