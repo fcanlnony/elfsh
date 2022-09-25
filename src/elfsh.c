@@ -54,7 +54,6 @@ int main()
     char exit_sign[]="exit";
     while (1) {
         signal(SIGINT,cat_sign);
-	fflush(stdout);
 	create();
         scanf("%[^\n]%*c",input);
         if (!strcmp(input, exit_sign)) {
