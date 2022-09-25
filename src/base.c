@@ -29,7 +29,6 @@ int exec_cmd(char *input)
     else if(pidN == 0) {
 	input_print(input);
 	buildincmd(argv);
-	exit(0);
     } else {
 	int status = wait(&status);
 	if(WIFEXITED(status))
