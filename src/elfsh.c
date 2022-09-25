@@ -8,6 +8,7 @@
 
 #include "base.h"
 #include "define.h"
+#include "argv.h"
 
 static void getUsername();
 
@@ -48,8 +49,16 @@ void cat_sign(int signnum)
 
 char *argv[50];
 
-int main()
+int main(int argc,char *argvm[])
 {
+    if(argc == 2) {
+	argv_command(argvm);
+	return 0;
+    }
+    if(argc > 2) {
+	fprintf(stderr, "Too many parameters.\n");
+	exit(1);
+    }
     char input[1024];
     char exit_sign[]="exit";
     while (1) {
