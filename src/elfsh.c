@@ -9,6 +9,7 @@
 #include "base.h"
 #include "define.h"
 #include "argv.h"
+#include "buildin.h"
 
 static void getUsername();
 
@@ -49,6 +50,24 @@ void cat_sign(int signnum)
 
 char *argv[50];
 
+void input_print(char *input)
+{
+    const char NULL_char[] = " ";
+    argv[0] = strtok(input,NULL_char);
+    short i = 0;
+    while(argv[i] != NULL)
+	argv[++i] = strtok(NULL,NULL_char);
+}
+
+static short checkinside(char *charArray[]);
+
+static short checkinside(char *charArray[])
+{
+    if(strcmp(charArray[0],"cd"))
+	return -1;
+    return 0;
+}
+
 int main(int argc,char *argvm[])
 {
     if(argc == 2) {
@@ -68,7 +87,10 @@ int main(int argc,char *argvm[])
         if (!strcmp(input, exit_sign)) {
             exit(0);
         } else {
-            exec_cmd(input);
-        }
+	    input_print(input);
+            if(checkinside(argv) == 0)
+		cmd_cd(argv[1]);
+	    else exec_cmd(argv); 
+	}
     }
 }
