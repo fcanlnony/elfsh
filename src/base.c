@@ -6,20 +6,8 @@
 #include <sys/types.h>
 
 #include "base.h"
-#include "buildin.h"
 
-extern char *argv[50];
-
-void input_print(char *input)
-{
-    const char NULL_char[] = " ";
-    argv[0] = strtok(input,NULL_char);
-    short i = 0;
-    while(argv[i] != NULL)
-	argv[++i] = strtok(NULL,NULL_char);
-}
-
-int exec_cmd(char *input)
+int exec_cmd(char *argv[])
 {
     pid_t pidN = fork();
     if(pidN < 0) {
@@ -27,8 +15,8 @@ int exec_cmd(char *input)
 	return -1;
     }
     else if(pidN == 0) {
-	input_print(input);
-	buildincmd(argv);
+	execvp(argv[0],argv);
+	exit(0);
     } else {
 	int status = wait(&status);
 	if(WIFEXITED(status))
