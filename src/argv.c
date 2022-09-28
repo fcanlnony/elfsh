@@ -14,7 +14,7 @@ static void help_cmd()
 void argv_command(char *argv[])
 {
     if(strcmp(argv[1],"--version") == 0)
-	fprintf(stdout, "elfsh , version 0.0.2\n");
+	fprintf(stdout, "elfsh , version 0.0.3\n");
     else if(strcmp(argv[1],"--help") == 0)
 	help_cmd();
     else fprintf(stdout, "elfsh : --help to get the information.\n");
