@@ -59,15 +59,6 @@ void input_print(char *input)
 	argv[++i] = strtok(NULL,NULL_char);
 }
 
-static short checkinside(char *charArray[]);
-
-static short checkinside(char *charArray[])
-{
-    if(strcmp(charArray[0],"cd"))
-	return -1;
-    return 0;
-}
-
 int main(int argc,char *argvm[])
 {
     if(argc == 2) {
