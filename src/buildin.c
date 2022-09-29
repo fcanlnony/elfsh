@@ -6,6 +6,13 @@
 
 #include "buildin.h"
 
+short checkinside(char *charArray[])
+{
+    if(strcmp(charArray[0],"cd"))
+	return -1;
+    return 0;
+}
+
 short cmd_cd(char *argv)
 {
     char cwd[100];
