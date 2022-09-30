@@ -66,8 +66,20 @@ int main(int argc,char *argvm[])
 	return 0;
     }
     if(argc > 2) {
-	fprintf(stderr, "Too many parameters.\n");
-	exit(1);
+	if(strcmp(argvm[1],"--run") == 0) {
+	    if(argc >= 4) {
+		fprintf(stderr,"Too many parameters.\n");
+		exit(1);
+	    }
+	    char *t[2];
+	    t[0] = "bash";
+	    t[1] = argvm[2];
+	    execv("/bin/bash",t);
+	}
+	else {
+	    fprintf(stderr, "Too many parameters.\n");
+	    exit(1);
+	}
     }
     char input[1024];
     char exit_sign[]="exit";
@@ -81,7 +93,7 @@ int main(int argc,char *argvm[])
 	    input_print(input);
             if(checkinside(argv) == 0)
 		cmd_cd(argv[1]);
-	    else exec_cmd(argv); 
+	    else exec_cmd(argv);
 	}
     }
 }
