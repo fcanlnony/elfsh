@@ -72,12 +72,12 @@ int main(int argc,char *argvm[])
 		exit(1);
 	    }
 	    char *t[2];
-	    t[0] = "bash";
+	    t[0] = "sh";
 	    t[1] = argvm[2];
-	    execv("/bin/bash",t);
+	    execv("/bin/sh",t);
 	}
 	else {
-	    fprintf(stderr, "Too many parameters.\n");
+	    fprintf(stderr, "Not such option or too many parameters.\n");
 	    exit(1);
 	}
     }
