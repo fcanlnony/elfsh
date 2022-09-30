@@ -9,6 +9,7 @@ static void help_cmd();
 static void help_cmd()
 {
     printf("--version show the elfsh version\n");
+    printf("--run run a script(Use bash to run the script)\n");
 }
 
 void argv_command(char *argv[])
