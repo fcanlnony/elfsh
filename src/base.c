@@ -15,7 +15,8 @@ int exec_cmd(char *argv[])
 	return -1;
     }
     else if(pidN == 0) {
-	execvp(argv[0],argv);
+	if(execvp(argv[0],argv) < 0)
+	    fprintf(stderr, "elfsh : command : %s : could not found\n", argv[0]);
 	exit(0);
     } else {
 	int status = wait(&status);
