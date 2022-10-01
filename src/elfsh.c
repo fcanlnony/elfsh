@@ -41,14 +41,16 @@ void create()
     printf(" ] >>> ");
 }
 
-void cat_sign(int signnum)
+static void cat_sign(int signnum);
+static void cat_sign(int signnum)
 {
     printf("\nSignal : %d\n",signnum);
 }
 
 char *argv[50];
 
-void input_print(char *input)
+static void input_print(char *input);
+static void input_print(char *input)
 {
     const char NULL_char[] = " ";
     argv[0] = strtok(input,NULL_char);
@@ -79,15 +81,17 @@ int main(int argc,char *argvm[])
 	    exit(1);
 	}
     }
-    char input[1024];
     char exit_sign[]="exit";
     signal(SIGINT,cat_sign);
     while (1) {
+	char input[1024] = "";
 	create();
-        scanf("%[^\n]%*c",input);
-        if (strcmp(input, exit_sign) == 0) {
+	scanf("%[^\n]%*c",input);
+	if (strcmp(input, exit_sign) == 0) {
             exit(0);
-        } else {
+        } else if(strcmp(input,"") == 0) {
+	    return 0;
+	} else {
 	    input_print(input);
             if(checkinside(argv) == 0)
 		cmd_cd(argv[1]);
