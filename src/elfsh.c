@@ -43,9 +43,7 @@ void create()
 
 void cat_sign(int signnum)
 {
-    char errput[1024];
-    sprintf(errput,"\n\033[31mSignal : %d \t\t\t\t\t:(\n\033[0m",signnum);
-    printf("%s",errput);
+    printf("\nSignal : %d\n",signnum);
 }
 
 char *argv[50];
@@ -83,11 +81,11 @@ int main(int argc,char *argvm[])
     }
     char input[1024];
     char exit_sign[]="exit";
+    signal(SIGINT,cat_sign);
     while (1) {
-        signal(SIGINT,cat_sign);
 	create();
         scanf("%[^\n]%*c",input);
-        if (!strcmp(input, exit_sign)) {
+        if (strcmp(input, exit_sign) == 0) {
             exit(0);
         } else {
 	    input_print(input);
