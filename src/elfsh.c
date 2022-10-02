@@ -31,9 +31,9 @@ static void getPath()
     printf("%s",path);
 }
 
-void create();
+static void create();
 
-void create()
+static void create()
 {
     getUsername();
     printf(" [ ");
@@ -42,12 +42,13 @@ void create()
 }
 
 static void cat_sign(int signnum);
+
 static void cat_sign(int signnum)
 {
     printf("\nSignal : %d\n",signnum);
 }
 
-char *argv[50];
+char *argv[50] = {NULL};
 
 static void input_print(char *input);
 static void input_print(char *input)
@@ -58,6 +59,11 @@ static void input_print(char *input)
     while(argv[i] != NULL)
 	argv[++i] = strtok(NULL,NULL_char);
 }
+
+static void NULL_function();
+
+static void NULL_function()
+{}
 
 int main(int argc,char *argvm[])
 {
@@ -81,17 +87,19 @@ int main(int argc,char *argvm[])
 	    exit(1);
 	}
     }
+    char *input = malloc(sizeof(char)*1024);
     char exit_sign[]="exit";
     signal(SIGINT,cat_sign);
     while (1) {
-	char input[1024] = "";
+	memset(input,0x00,1024);
 	create();
 	scanf("%[^\n]%*c",input);
-	if (strcmp(input, exit_sign) == 0) {
-            exit(0);
-        } else if(strcmp(input,"") == 0) {
+        if(strcmp(input,"") == 0) {
 	    return 0;
-	} else {
+        }
+	if (strcmp(input, exit_sign) == 0) {
+	    exit(0);
+        } else {
 	    input_print(input);
             if(checkinside(argv) == 0)
 		cmd_cd(argv[1]);
