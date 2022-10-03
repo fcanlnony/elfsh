@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <pwd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -16,7 +17,12 @@ short checkinside(char *charArray[])
 short cmd_cd(char *argv)
 {
     char cwd[100];
-    if(access(argv,F_OK) == -1) {
+    if(strcmp(argv,"~") == 0) {
+	struct passwd *pwd=getpwuid(getuid());
+	chdir("/home");
+	chdir(pwd->pw_name);
+	return 0;
+    } else if(access(argv,F_OK) == -1) {
 	fprintf(stdout,"elfsh: cd :%s :Not such file or directory\n",argv);
 	return -1;
     }
