@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <readline/readline.h>
 
 #include "base.h"
 #include "define.h"
@@ -87,16 +88,15 @@ int main(int argc,char *argvm[])
 	    exit(1);
 	}
     }
-    char *input = malloc(sizeof(char)*1024);
     char exit_sign[]="exit";
     signal(SIGINT,cat_sign);
     while (1) {
+	char *input = malloc(sizeof(char)*1024);
 	memset(input,0x00,1024);
 	create();
-	scanf("%[^\n]%*c",input);
-        if(strcmp(input,"") == 0) {
-	    return 0;
-        }
+	input = readline("");
+	if(strcmp(input,"") == 0)
+	    continue;
 	if (strcmp(input, exit_sign) == 0) {
 	    exit(0);
         } else {
@@ -105,5 +105,6 @@ int main(int argc,char *argvm[])
 		cmd_cd(argv[1]);
 	    else exec_cmd(argv);
 	}
+	free(input);
     }
 }
