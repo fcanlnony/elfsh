@@ -61,11 +61,6 @@ static void input_print(char *input)
 	argv[++i] = strtok(NULL,NULL_char);
 }
 
-static void NULL_function();
-
-static void NULL_function()
-{}
-
 int main(int argc,char *argvm[])
 {
     if(argc == 2) {
