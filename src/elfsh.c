@@ -54,11 +54,10 @@ char *argv[50] = {NULL};
 static void input_print(char *input);
 static void input_print(char *input)
 {
-    const char NULL_char[] = " ";
-    argv[0] = strtok(input,NULL_char);
+    argv[0] = strtok(input," ");
     short i = 0;
     while(argv[i] != NULL)
-	argv[++i] = strtok(NULL,NULL_char);
+	argv[++i] = strtok(NULL," ");
 }
 
 int main(int argc,char *argvm[])
@@ -83,7 +82,6 @@ int main(int argc,char *argvm[])
 	    exit(1);
 	}
     }
-    char exit_sign[]="exit";
     signal(SIGINT,cat_sign);
     while (1) {
 	char *input = malloc(sizeof(char)*1024);
@@ -92,7 +90,7 @@ int main(int argc,char *argvm[])
 	input = readline(" ");
 	if(strcmp(input,"") == 0)
 	    continue;
-	if (strcmp(input, exit_sign) == 0) {
+	if (strcmp(input,"exit") == 0) {
 	    exit(0);
         } else {
 	    input_print(input);
