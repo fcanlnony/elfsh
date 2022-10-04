@@ -19,8 +19,8 @@ static void getUsername()
     struct passwd *pwd;
     pwd=getpwuid(getuid());
     if(strcmp(pwd->pw_name,"root") == 0)
-        printf("\033[1;;31m%s\033[0m",pwd->pw_name);
-    else printf("\033[1;;0m%s\033[0m",pwd->pw_name);
+        printf("\001\033[1;;31m%s\033[0m\002",pwd->pw_name);
+    else printf("\001\033[1;;0m%s\033[0m\002",pwd->pw_name);
 }
 
 static void getPath();
@@ -29,7 +29,7 @@ static void getPath()
 {
     char path[100];
     getcwd(path,sizeof(path));
-    printf("%s",path);
+    printf("\001%s\002",path);
 }
 
 static void create();
@@ -37,9 +37,9 @@ static void create();
 static void create()
 {
     getUsername();
-    printf(" [ ");
+    printf("\001 [ \002");
     getPath();
-    printf(" ] >>> ");
+    printf("\001 ] >>>\002");
 }
 
 static void cat_sign(int signnum);
@@ -89,7 +89,7 @@ int main(int argc,char *argvm[])
 	char *input = malloc(sizeof(char)*1024);
 	memset(input,0x00,1024);
 	create();
-	input = readline("");
+	input = readline(" ");
 	if(strcmp(input,"") == 0)
 	    continue;
 	if (strcmp(input, exit_sign) == 0) {
