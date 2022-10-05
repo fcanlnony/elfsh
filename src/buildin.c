@@ -14,7 +14,8 @@ short checkinside(char *charArray[])
     return 0;
 }
 
-short cmd_cd(char *argv)
+static short cmd_cd(char *argv);
+static short cmd_cd(char *argv)
 {
     char cwd[100];
     if(strcmp(argv,"~") == 0) {
@@ -32,4 +33,10 @@ short cmd_cd(char *argv)
     } else if(getcwd(cwd,sizeof(cwd)) == NULL)
 	fprintf(stderr,"getcwd() error\n");
     return 0;
+}
+
+void buildin(char *argv[])
+{
+    if(checkinside(argv) == 0)
+	cmd_cd(argv[1]);
 }
