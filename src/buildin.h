@@ -2,6 +2,6 @@
 #define BUILDIN_H_
 
 short checkinside(char *charArray[]);
-short cmd_cd(char *argv);
+void buildin(char **argv);
 
 #endif /*BUILDIN_H_*/
