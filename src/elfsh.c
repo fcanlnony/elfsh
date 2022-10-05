@@ -94,8 +94,8 @@ int main(int argc,char *argvm[])
 	    exit(0);
         } else {
 	    input_print(input);
-            if(checkinside(argv) == 0)
-		cmd_cd(argv[1]);
+            if(checkinside(argv) != -1)
+		buildin(argv);
 	    else exec_cmd(argv);
 	}
 	free(input);
