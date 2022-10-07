@@ -21,8 +21,8 @@ static void create()
     char path[100];
     getcwd(path,sizeof(path));
     if(strcmp(pwd->pw_name,"root"))
-        printf("\001\033[1;;0m%s [ %s ]\033[0m\002",pwd->pw_name,path);
-    else printf("\001\033[1;;31m%s\033[0m\033[1;;31m [ \033[0m%s\033[1;;31m ]\033[0m\002",pwd->pw_name,path);
+        printf("\001\033[1;;0m%s\002\001 [ %s ]\033[0m\002",pwd->pw_name,path);
+    else printf("\001\033[1;;31m%s\033[0m\002\001 [ %s ]\002",pwd->pw_name,path);
 }
 
 void cat_sign(int signnum);
@@ -33,6 +33,8 @@ void cat_sign(int signnum)
 }
 
 char *argv[50] = {NULL};
+char *argvA[10] = {NULL};
+char *argvB[10] = {NULL};
 
 static void input_print(char *input);
 static void input_print(char *input)
@@ -83,7 +85,6 @@ int main(int argc,char *argvm[])
 		buildin(argv);
 	    else exec_cmd(argv);
 	}
-	//add_history(input);
 	write_history(NULL);
 	free(input);
     }
