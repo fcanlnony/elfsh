@@ -13,18 +13,6 @@
 #include "argv.h"
 #include "buildin.h"
 
-static void create();
-
-static void create()
-{
-    struct passwd *pwd = getpwuid(getuid());
-    char path[100];
-    getcwd(path,sizeof(path));
-    if(strcmp(pwd->pw_name,"root"))
-        printf("\001\033[1;;0m%s\002\001 [ %s ]\033[0m\002",pwd->pw_name,path);
-    else printf("\001\033[1;;31m%s\033[0m\002\001 [ %s ]\002",pwd->pw_name,path);
-}
-
 void cat_sign(int signnum);
 
 void cat_sign(int signnum)
@@ -68,12 +56,16 @@ int main(int argc,char *argvm[])
 	}
     }
     signal(SIGINT,cat_sign);
+    struct passwd *pwd = getpwuid(getuid());
     read_history(NULL);
     while (1) {
+	char path[100];
+	getcwd(path,sizeof(path));
+	char *readline_output_str = malloc(sizeof(char)*100);
+	sprintf(readline_output_str,"%s [ %s ] >>> ",pwd->pw_name,path);
 	char *input = malloc(sizeof(char)*1024);
 	memset(input,0x00,1024);
-	create();
-	input = readline(" >>> ");
+	input = readline(readline_output_str);
 	add_history(input);
 	if(strcmp(input,"") == 0)
 	    continue;
@@ -87,5 +79,6 @@ int main(int argc,char *argvm[])
 	}
 	write_history(NULL);
 	free(input);
+	free(readline_output_str);
     }
 }
