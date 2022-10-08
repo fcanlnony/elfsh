@@ -62,7 +62,9 @@ int main(int argc,char *argvm[])
 	char path[100];
 	getcwd(path,sizeof(path));
 	char *readline_output_str = malloc(sizeof(char)*100);
-	sprintf(readline_output_str,"%s [ %s ] >>> ",pwd->pw_name,path);
+	if(strcmp(pwd->pw_name,"root"))
+	    sprintf(readline_output_str,"%s [ %s ] >>> ",pwd->pw_name,path);
+	else sprintf(readline_output_str,"\033[1;;31m%s\033[0m\033[1;;31m [ \033[0m%s\033[1;;31m ]\033[0m >>> ",pwd->pw_name,path);
 	char *input = malloc(sizeof(char)*1024);
 	memset(input,0x00,1024);
 	input = readline(readline_output_str);
