@@ -1,4 +1,5 @@
 # Version : v0.0.x
 
-Unsupport some commonly used function like : Built-in features(for example: pipe)
-
+The functionality that has already been implemented:
+	history
+	build-in commands
