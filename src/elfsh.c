@@ -1,6 +1,5 @@
 #include <ctype.h>
 #include <pwd.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,13 +11,6 @@
 #include "define.h"
 #include "argv.h"
 #include "buildin.h"
-
-void cat_sign(int signnum);
-
-void cat_sign(int signnum)
-{
-    printf("\nSignal : %d\n",signnum);
-}
 
 char *argv[50] = {NULL};
 char *argvA[10] = {NULL};
@@ -55,9 +47,12 @@ int main(int argc,char *argvm[])
 	    exit(1);
 	}
     }
-    signal(SIGINT,cat_sign);
     struct passwd *pwd = getpwuid(getuid());
-    read_history(NULL);
+    char history_file[55];
+    if(strcmp(pwd->pw_name,"root"))
+	sprintf(history_file,"/home/%s/.elfsh_history",pwd->pw_name);
+    else sprintf(history_file,"/root/.elfsh_history");
+    read_history(history_file);
     while (1) {
 	char path[100];
 	getcwd(path,sizeof(path));
@@ -79,7 +74,7 @@ int main(int argc,char *argvm[])
 		buildin(argv);
 	    else exec_cmd(argv);
 	}
-	write_history(NULL);
+	write_history(history_file);
 	free(input);
 	free(readline_output_str);
     }
