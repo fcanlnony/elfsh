@@ -16,8 +16,8 @@ char *argv[50] = {NULL};
 char *argvA[10] = {NULL};
 char *argvB[10] = {NULL};
 
-static void input_print(char *input);
-static void input_print(char *input)
+static void input_strtok(char *input);
+static void input_strtok(char *input)
 {
     argv[0] = strtok(input," ");
     short i = 0;
@@ -69,7 +69,7 @@ int main(int argc,char *argvm[])
 	if (strcmp(input,"exit") == 0) {
 	    exit(0);
         } else {
-	    input_print(input);
+	    input_strtok(input);
             if(checkinside(argv) != -1)
 		buildin(argv);
 	    else exec_cmd(argv);
