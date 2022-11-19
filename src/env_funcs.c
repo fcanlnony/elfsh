@@ -24,6 +24,5 @@ void run_env_cmd(char **argv)
     else if(strcmp(argv[2],"add") == 0) {
 	if(strcmp(argv[4],"NULL") == 0)
 	    setenv(argv[1],argv[3],1);
-	else _exit(0);
-    }
+    } else _exit(0);
 }
