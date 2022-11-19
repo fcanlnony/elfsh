@@ -11,6 +11,7 @@
 #include "define.h"
 #include "argv.h"
 #include "buildin.h"
+#include "env_funcs.h"
 
 char *argv[50] = {NULL};
 char *argvA[10] = {NULL};
@@ -72,6 +73,8 @@ int main(int argc,char *argvm[])
 	    input_strtok(input);
             if(checkinside(argv) != -1)
 		buildin(argv);
+	    else if(check_env_cmd(argv[0]))
+		run_env_cmd(argv);
 	    else exec_cmd(argv);
 	}
 	write_history(history_file);
