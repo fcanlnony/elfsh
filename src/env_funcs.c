@@ -19,8 +19,9 @@ void run_env_cmd(char **argv)
 	    if(strcmp(argv[3],"NULL") == 0)
 		printf("%s\n",getenv(argv[1]));
 	} else if(strcmp(argv[2],"add") == 0) {
-	    if(strcmp(argv[4],"NULL") == 0)
-		setenv(argv[1],argv[3],1);
+		char *tmp = malloc(1024*sizeof(char));
+		sprintf(tmp,"%s=%s",argv[1],argv[3]);
+		putenv(tmp);
 	}
     }
 }
