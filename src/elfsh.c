@@ -12,6 +12,7 @@
 #include "argv.h"
 #include "buildin.h"
 #include "env_funcs.h"
+#include "pipe_elfsh.h"
 
 char *argv[50] = {NULL};
 char *argvA[10] = {NULL};
@@ -69,7 +70,10 @@ int main(int argc,char *argvm[])
 	    continue;
 	if (strcmp(input,"exit") == 0) {
 	    exit(0);
-        } else {
+        } if(check_pipe(input)) {
+	    pipe_strtok(input,argvA,argvB);
+	    pipe_cmd(argvA, argvB);
+	} else {
 	    input_strtok(input);
             if(checkinside(argv) != -1)
 		buildin(argv);

@@ -1,8 +1,8 @@
 cc = gcc -std=c11 -lreadline
 cc_debug = ${cc} -g
-headers = env_funcs.h buildin.h base.h define.h argv.h
+headers = env_funcs.h buildin.h base.h define.h argv.h pipe_elfsh.h
 name = elfsh
-sources = env_funcs.c buildin.c base.c argv.c elfsh.c
+sources = env_funcs.c buildin.c base.c pipe_elfsh.c argv.c elfsh.c
 
 all:
 	${cc} ${headers} ${sources} -o ${name}
