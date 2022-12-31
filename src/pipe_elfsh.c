@@ -21,17 +21,14 @@ void pipe_strtok(char *__string__,char **arrayA,char **arrayB)
     char *string = malloc(1024*sizeof(char));
     memset(string,0x00,1024);
     strcpy(string,__string__);
-    char *array_stringA = malloc(512*sizeof(char));
-    char *array_stringB = malloc(512*sizeof(char));
-    memset(array_stringA,0x00,512);
-    memset(array_stringB,0x00,512);
-    array_stringA = strsep(&string,"|");
-    array_stringB = strsep(&string,"|");
+    char *array_string[2] = {NULL};
+    array_string[0] = strsep(&string,"|");
+    array_string[1] = strsep(&string,"|");
     short i = 0,k = 0;
     while(arrayA[i] != NULL)
-	arrayA[i++] = strsep(&array_stringA," ");
+	arrayA[i++] = strsep(&array_string[0]," ");
     while(arrayB[k] != NULL)
-	arrayB[k++] = strsep(&array_stringB," ");
+	arrayB[k++] = strsep(&array_string[1]," ");
 }
 
 int pipe_cmd(char **argvA,char **argvB)
